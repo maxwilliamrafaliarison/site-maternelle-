@@ -1,0 +1,614 @@
+/* =====================================================
+   MATERNELLE RENÉ CASSIN - FIANARANTSOA
+   Classe TPS/PS - Mme Fy ANDRIANARIVO
+   Année scolaire 2025-2026
+   ===================================================== */
+
+/* --- Variables de couleurs --- */
+:root {
+  --bleu-ecole:    #3A7BD5;
+  --vert-nature:   #5CB85C;
+  --orange-doux:   #F5A623;
+  --rose-tps:      #E91E8C;
+  --bleu-ps:       #1565C0;
+  --fond:          #F4F7FB;
+  --blanc:         #FFFFFF;
+  --texte:         #2C3E50;
+  --gris-clair:    #ECF0F1;
+  --bordure:       #D0D8E4;
+
+  /* Domaines */
+  --langage:  #8E44AD;
+  --maths:    #E74C3C;
+  --arts:     #E67E22;
+  --eps:      #27AE60;
+  --explorer: #2980B9;
+  --evar:     #D81B60;
+  --edd:      #388E3C;
+  --atsem:    #795548;
+}
+
+/* --- Reset & base --- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  background: var(--fond);
+  color: var(--texte);
+  line-height: 1.65;
+}
+
+a { color: var(--bleu-ecole); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+h1, h2, h3, h4 { font-weight: 700; line-height: 1.25; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.5rem; margin-bottom: 0.75rem; }
+h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+h4 { font-size: 1rem; }
+
+/* ===================================================
+   BANNIÈRE LOGOS — René Cassin + AEFE
+   =================================================== */
+.logo-banner {
+  background: #fff;
+  border-bottom: 3px solid var(--bleu-ecole);
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+.logo-banner-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1.5rem;
+  gap: 1rem;
+}
+.logo-ecole img {
+  height: 72px;
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,.12));
+  transition: transform .2s;
+}
+.logo-ecole img:hover { transform: scale(1.04); }
+
+.logo-aefe img {
+  height: 50px;
+  width: auto;
+  display: block;
+  transition: transform .2s;
+}
+.logo-aefe img:hover { transform: scale(1.04); }
+
+.logo-banner-center {
+  text-align: center;
+  flex: 1;
+}
+.logo-banner-center .titre-ecole {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--bleu-ecole);
+  line-height: 1.2;
+  letter-spacing: .01em;
+}
+.logo-banner-center .sous-titre {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 0.15rem;
+}
+.logo-banner-center .annee-badge {
+  display: inline-block;
+  background: var(--bleu-ecole);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.15rem 0.7rem;
+  border-radius: 20px;
+  margin-top: 0.3rem;
+}
+
+@media (max-width: 600px) {
+  .logo-banner-inner { padding: 0.5rem 0.8rem; }
+  .logo-ecole img { height: 48px; }
+  .logo-aefe img  { height: 36px; }
+  .logo-banner-center .titre-ecole { font-size: 0.85rem; }
+}
+
+/* Bandeau logo dans les fiches (impression) */
+.fiche-logos {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1.5rem;
+  border-bottom: 2px solid var(--bordure);
+  background: #fff;
+}
+.fiche-logos img.logo-ecole-sm {
+  height: 44px;
+  width: auto;
+}
+.fiche-logos img.logo-aefe-sm {
+  height: 30px;
+  width: auto;
+}
+.fiche-logos .fiche-logos-center {
+  text-align: center;
+  font-size: 0.75rem;
+  color: #555;
+  font-weight: 600;
+}
+
+/* --- Navigation principale --- */
+.navbar {
+  background: var(--bleu-ecole);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,.25);
+}
+.navbar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  padding: 0.6rem 1.5rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.navbar-brand {
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.1rem;
+  text-decoration: none;
+  flex: 1;
+  min-width: 200px;
+}
+.navbar-brand span { font-size: 0.8rem; font-weight: 400; display: block; opacity: .85; }
+.nav-links {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+}
+.nav-links a {
+  color: rgba(255,255,255,.9);
+  padding: 0.35rem 0.7rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: background .2s;
+  text-decoration: none;
+}
+.nav-links a:hover, .nav-links a.active {
+  background: rgba(255,255,255,.22);
+  text-decoration: none;
+}
+
+/* --- Header de page --- */
+.page-header {
+  padding: 2.5rem 1.5rem 1.5rem;
+  text-align: center;
+  background: linear-gradient(135deg, var(--bleu-ecole), #5E9CF0);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.page-header::after {
+  content: "";
+  position: absolute;
+  bottom: -20px;
+  left: 0; right: 0;
+  height: 40px;
+  background: var(--fond);
+  border-radius: 50% 50% 0 0 / 40px;
+}
+.page-header h1 { font-size: 2.2rem; text-shadow: 0 2px 6px rgba(0,0,0,.2); }
+.page-header p { margin-top: 0.4rem; opacity: .9; font-size: 1rem; }
+.period-badge {
+  display: inline-block;
+  background: rgba(255,255,255,.22);
+  border: 2px solid rgba(255,255,255,.6);
+  border-radius: 30px;
+  padding: 0.3rem 1.2rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-top: 0.6rem;
+}
+
+/* --- Conteneur principal --- */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* --- Cartes --- */
+.card {
+  background: var(--blanc);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,.07);
+  margin-bottom: 1.5rem;
+}
+.card-domaine {
+  border-left: 5px solid var(--bleu-ecole);
+}
+.card-domaine.langage  { border-left-color: var(--langage); }
+.card-domaine.maths    { border-left-color: var(--maths); }
+.card-domaine.arts     { border-left-color: var(--arts); }
+.card-domaine.eps      { border-left-color: var(--eps); }
+.card-domaine.explorer { border-left-color: var(--explorer); }
+.card-domaine.evar     { border-left-color: var(--evar); }
+.card-domaine.edd      { border-left-color: var(--edd); }
+
+/* --- Badges de domaine --- */
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  margin-right: 0.3rem;
+  margin-bottom: 0.3rem;
+}
+.badge-langage  { background: var(--langage); color:#fff; }
+.badge-maths    { background: var(--maths); color:#fff; }
+.badge-arts     { background: var(--arts); color:#fff; }
+.badge-eps      { background: var(--eps); color:#fff; }
+.badge-explorer { background: var(--explorer); color:#fff; }
+.badge-evar     { background: var(--evar); color:#fff; }
+.badge-edd      { background: var(--edd); color:#fff; }
+.badge-tps      { background: #FCE4EC; color: #880E4F; border:1px solid #F48FB1; }
+.badge-ps       { background: #E3F2FD; color: #0D47A1; border:1px solid #90CAF9; }
+.badge-atsem    { background: var(--atsem); color:#fff; }
+
+/* --- Grille 2 colonnes TPS/PS --- */
+.grid-niveaux {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+@media (max-width: 700px) { .grid-niveaux { grid-template-columns: 1fr; } }
+
+.niveau-box {
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+}
+.niveau-box.tps {
+  background: #FFF0F5;
+  border: 2px solid #F8BBD0;
+}
+.niveau-box.ps {
+  background: #F0F7FF;
+  border: 2px solid #BBDEFB;
+}
+.niveau-box h4 {
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.niveau-box.tps h4 { color: #880E4F; }
+.niveau-box.ps  h4 { color: #0D47A1; }
+.niveau-box ul  { padding-left: 1.2rem; font-size: 0.9rem; }
+.niveau-box li  { margin-bottom: 0.3rem; }
+
+/* --- Bloc ATSEM --- */
+.atsem-box {
+  background: #FFF8E1;
+  border: 2px solid #FFE082;
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  margin-top: 1rem;
+}
+.atsem-box h4 {
+  color: #5D4037;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.atsem-box ul  { padding-left: 1.2rem; font-size: 0.9rem; }
+.atsem-box li  { margin-bottom: 0.3rem; }
+
+/* --- Fiche d'activité (printable) --- */
+.fiche {
+  background: var(--blanc);
+  border-radius: 12px;
+  box-shadow: 0 3px 15px rgba(0,0,0,.1);
+  margin-bottom: 2rem;
+  overflow: hidden;
+  page-break-inside: avoid;
+}
+.fiche-header {
+  padding: 1rem 1.5rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.fiche-header.langage  { background: var(--langage); }
+.fiche-header.maths    { background: var(--maths); }
+.fiche-header.arts     { background: var(--arts); }
+.fiche-header.eps      { background: var(--eps); }
+.fiche-header.explorer { background: var(--explorer); }
+.fiche-header.evar     { background: var(--evar); }
+.fiche-header.edd      { background: var(--edd); }
+.fiche-header h3 { margin: 0; font-size: 1.1rem; }
+.fiche-header .meta { font-size: 0.8rem; opacity: .9; text-align: right; }
+
+.fiche-body { padding: 1.2rem 1.5rem; }
+
+.fiche-infos {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.fiche-info-item {
+  background: var(--gris-clair);
+  border-radius: 8px;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.82rem;
+}
+.fiche-info-item strong { font-weight: 700; }
+
+.fiche-section { margin-bottom: 1rem; }
+.fiche-section h4 {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: #666;
+  border-bottom: 1px solid var(--bordure);
+  padding-bottom: 0.3rem;
+  margin-bottom: 0.5rem;
+}
+.fiche-section ul { padding-left: 1.3rem; font-size: 0.9rem; }
+.fiche-section li { margin-bottom: 0.25rem; }
+
+.deroulement-step {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 0.6rem;
+  align-items: flex-start;
+}
+.step-num {
+  background: var(--bleu-ecole);
+  color: #fff;
+  border-radius: 50%;
+  width: 24px; height: 24px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem; font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.step-content { font-size: 0.9rem; flex: 1; }
+.step-content strong { display: block; }
+
+/* --- Tableau de programmation --- */
+.prog-table-wrapper { overflow-x: auto; }
+.prog-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  min-width: 900px;
+}
+.prog-table th, .prog-table td {
+  border: 1px solid var(--bordure);
+  padding: 0.5rem 0.7rem;
+  vertical-align: top;
+}
+.prog-table thead th {
+  background: var(--bleu-ecole);
+  color: #fff;
+  text-align: center;
+  font-weight: 700;
+  position: sticky;
+  top: 60px;
+}
+.prog-table .col-domaine {
+  background: var(--gris-clair);
+  font-weight: 700;
+  width: 130px;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+}
+.col-domaine.langage  { background: var(--langage); }
+.col-domaine.maths    { background: var(--maths); }
+.col-domaine.arts     { background: var(--arts); }
+.col-domaine.eps      { background: var(--eps); }
+.col-domaine.explorer { background: var(--explorer); }
+.col-domaine.evar     { background: var(--evar); }
+.col-domaine.edd      { background: var(--edd); }
+
+.prog-table .niveau-mini {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 8px;
+  display: inline-block;
+  margin-bottom: 2px;
+}
+.niveau-mini.tps { background:#FCE4EC; color:#880E4F; }
+.niveau-mini.ps  { background:#E3F2FD; color:#0D47A1; }
+
+.prog-table td ul { margin: 0; padding-left: 1.1rem; }
+.prog-table td li { margin-bottom: 1px; }
+
+.periode-current { background: #FFFDE7 !important; }
+.periode-header.current { background: #F9A825 !important; }
+
+/* --- Cartes d'accueil --- */
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.2rem;
+  margin: 2rem 0;
+}
+.home-card {
+  background: var(--blanc);
+  border-radius: 14px;
+  padding: 1.5rem 1.2rem;
+  text-align: center;
+  box-shadow: 0 3px 12px rgba(0,0,0,.08);
+  transition: transform .2s, box-shadow .2s;
+  text-decoration: none;
+  color: var(--texte);
+  display: block;
+  border-top: 5px solid var(--bleu-ecole);
+}
+.home-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,.12); text-decoration: none; }
+.home-card .icon { font-size: 2.4rem; margin-bottom: 0.6rem; }
+.home-card h3 { font-size: 1rem; margin-bottom: 0.3rem; }
+.home-card p { font-size: 0.82rem; color: #666; }
+.home-card.langage  { border-top-color: var(--langage); }
+.home-card.maths    { border-top-color: var(--maths); }
+.home-card.arts     { border-top-color: var(--arts); }
+.home-card.eps      { border-top-color: var(--eps); }
+.home-card.explorer { border-top-color: var(--explorer); }
+.home-card.evar     { border-top-color: var(--evar); }
+.home-card.edd      { border-top-color: var(--edd); }
+.home-card.atsem    { border-top-color: var(--atsem); }
+
+/* --- Infos classe (accueil) --- */
+.classe-infos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+.classe-info-box {
+  background: var(--blanc);
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+}
+.classe-info-box .num { font-size: 2rem; font-weight: 800; color: var(--bleu-ecole); }
+.classe-info-box .label { font-size: 0.82rem; color: #666; }
+
+/* --- Planning semaine --- */
+.semaine-grid {
+  display: grid;
+  grid-template-columns: 80px repeat(5, 1fr);
+  border: 1px solid var(--bordure);
+  border-radius: 10px;
+  overflow: hidden;
+  font-size: 0.82rem;
+}
+.semaine-grid .sh {
+  background: var(--bleu-ecole);
+  color: #fff;
+  font-weight: 700;
+  padding: 0.5rem;
+  text-align: center;
+}
+.semaine-grid .heure {
+  background: var(--gris-clair);
+  font-weight: 700;
+  padding: 0.4rem 0.5rem;
+  border-bottom: 1px solid var(--bordure);
+  font-size: 0.78rem;
+}
+.semaine-grid .slot {
+  padding: 0.4rem 0.5rem;
+  border-bottom: 1px solid var(--bordure);
+  border-left: 1px solid var(--bordure);
+}
+.slot.langage  { background: #F3E5F5; }
+.slot.maths    { background: #FFEBEE; }
+.slot.arts     { background: #FFF8E1; }
+.slot.eps      { background: #E8F5E9; }
+.slot.explorer { background: #E3F2FD; }
+.slot.evar     { background: #FCE4EC; }
+.slot.regroupement { background: #EDE7F6; }
+.slot.accueil  { background: #F5F5F5; }
+.slot.sieste   { background: #E0F2F1; }
+.slot.atelier  { background: #FFF3E0; }
+
+/* --- Timeline ATSEM --- */
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 9px;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: var(--bordure);
+}
+.timeline-item {
+  position: relative;
+  margin-bottom: 1.2rem;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -1.75rem;
+  top: 6px;
+  width: 14px; height: 14px;
+  background: var(--atsem);
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 2px var(--atsem);
+}
+.timeline-time {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #888;
+  margin-bottom: 0.2rem;
+}
+.timeline-content {
+  background: var(--blanc);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  box-shadow: 0 1px 6px rgba(0,0,0,.08);
+}
+.timeline-content h4 { color: var(--atsem); font-size: 0.95rem; margin-bottom: 0.3rem; }
+
+/* --- Alertes / notes --- */
+.alert {
+  border-radius: 8px;
+  padding: 0.8rem 1.2rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+}
+.alert-info    { background: #E3F2FD; border-left: 4px solid #1565C0; }
+.alert-warning { background: #FFF8E1; border-left: 4px solid #F9A825; }
+.alert-success { background: #E8F5E9; border-left: 4px solid #2E7D32; }
+.alert-danger  { background: #FFEBEE; border-left: 4px solid #C62828; }
+
+/* --- Pied de page --- */
+footer {
+  background: var(--texte);
+  color: rgba(255,255,255,.75);
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.83rem;
+  margin-top: 3rem;
+}
+footer strong { color: #fff; }
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .page-header h1 { font-size: 1.5rem; }
+  .navbar-inner { padding: 0.5rem 1rem; }
+  .nav-links a { font-size: 0.75rem; padding: 0.25rem 0.5rem; }
+  .container { padding: 1.5rem 1rem; }
+  h2 { font-size: 1.3rem; }
+  .semaine-grid { font-size: 0.72rem; }
+  .semaine-grid .sh, .semaine-grid .heure { padding: 0.3rem; }
+}
